@@ -1,16 +1,13 @@
-/**
- * Specify the table name.
- */
-const TABLE = "users";
+const dbTables = require("../../app/constants/dbtable");
 
 /**
  * Run the database seeds.
  */
 exports.seed = knex => {
-  return knex(TABLE)
+  return knex(dbTables.users)
     .del()
     .then(() => {
-      return knex(TABLE).insert([
+      return knex(dbTables.users).insert([
         {
           name: "Bijaya Kuikel",
           username: "bijaya.kuikel",

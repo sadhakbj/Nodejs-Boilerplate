@@ -1,12 +1,9 @@
-/**
- * Specify the table name.
- */
-const TABLE = "users";
+const dbTables = require("../../app/constants/dbtable");
 /**
  * Run the migrations.
  */
 exports.up = knex => {
-  return knex.schema.createTable(TABLE, table => {
+  return knex.schema.createTable(dbTables.users, table => {
     table.increments();
     table.string("name").notNullable();
     table
@@ -23,4 +20,4 @@ exports.up = knex => {
 /**
  * Reverse the migrations.
  */
-exports.down = knex => knex.schema.dropTable(TABLE);
+exports.down = knex => knex.schema.dropTable(dbTables.users);

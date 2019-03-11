@@ -1,13 +1,14 @@
-const dotenv = require("dotenv");
-dotenv.config({ path: "../.env" });
+const dbConfig = require("./config/database");
 
 module.exports = {
   development: {
-    client: "postgresql",
+    client: dbConfig.client,
     connection: {
-      database: process.env.DB_DATABASE,
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD
+      host: dbConfig.host,
+      port: dbConfig.port,
+      database: dbConfig.database,
+      user: dbConfig.username,
+      password: dbConfig.password
     },
     pool: {
       min: 2,
