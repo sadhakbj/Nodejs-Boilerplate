@@ -15,6 +15,10 @@ class User extends Password(BaseModel) {
   static get tableName() {
     return dbTable.users;
   }
+
+  static get hiddenFields() {
+    return ["password"];
+  }
 }
 
 module.exports = User;

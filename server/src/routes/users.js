@@ -1,9 +1,10 @@
 const express = require("express");
 let router = express.Router();
-const UserController = require("../app/http/controllers/UsersController");
+const UsersController = require("../app/http/controllers/UsersController");
 
-router.get("/", UserController.getAll);
-router.post("/store", UserController.create);
-router.get("/current-user", UserController.getCurrentUser);
+router.get("/", UsersController.getAll);
+router.post("/store", UsersController.create);
+
+router.post("/authenticate", UsersController.authenticate);
 
 module.exports = router;

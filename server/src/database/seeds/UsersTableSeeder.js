@@ -12,7 +12,8 @@ exports.seed = knex => {
           name: "Bijaya Kuikel",
           username: "bijaya.kuikel",
           email: "bijaya@bijaya.com",
-          password: "password"
+          password:
+            "$2y$10$GkFw99v47Lev7zgFRl.HFOVtBd/q7dKZazN3Qqvi3EiDHD7XMDMjC" //password
         }
       ]);
     });

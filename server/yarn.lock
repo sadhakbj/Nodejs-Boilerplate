@@ -1663,6 +1663,11 @@ objection-password@^2.0.0:
   dependencies:
     bcrypt "^3.0.0"
 
+objection-visibility@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/objection-visibility/-/objection-visibility-0.4.0.tgz#8ca3f02e3edc5e256efc3db24a3cf7d5225e0e92"
+  integrity sha512-3LuUDj8sJ6GOwtH2WSOCsJv/N4h2JzYmhlFaz7tURtgHq0dk59AU7ModNUeTZV9madDhaFF6bbqsuZRxpyLNYg==
+
 objection@^1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/objection/-/objection-1.6.3.tgz#c4d08d3ba4a0995ada75e829dffc6ce21111b409"

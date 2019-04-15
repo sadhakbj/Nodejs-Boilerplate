@@ -48,6 +48,36 @@ class UserController {
       }
     });
   }
+
+  async authenticate(req, res, next) {
+    const { email, password } = req.body;
+    try {
+      const user = await User.query()
+        .first()
+        .where({ email });
+      if (user) {
+        const passwordValid = await user.verifyPassword(password);
+        if (passwordValid) {
+          return res.json({
+            message: "User logged in successfully.",
+            data: {
+              user
+            }
+          });
+        }
+      }
+      return res.json({
+        msg: "User not found"
+      });
+    } catch (excepetion) {
+      console.log(excepetion);
+      return res.json({
+        success: false,
+        message: excepetion.detail,
+        status: 500
+      });
+    }
+  }
 }
 
 module.exports = new UserController();
