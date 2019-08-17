@@ -18,10 +18,10 @@ Model.knex(knex);
 app.use(bodyParser.json());
 app.use(morgan("combined"));
 
-app.use("/api/users", require("./routes/users"));
+app.get("/", (req, res) => {
+  res.send("Welcome to my new application");
+});
 
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "index.html"));
-// });
+app.use("/api/users", require("./routes/users"));
 
 module.exports = app;

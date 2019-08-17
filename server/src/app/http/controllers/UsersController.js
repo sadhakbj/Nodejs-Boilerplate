@@ -1,6 +1,8 @@
 const User = require("../../models/User");
 const AuthService = require("../../Services/AuthService");
 const { success, error } = require("../../Services/Formatter/response");
+const { logger } = require("../../Services/logger");
+
 /**
  * UserController description.
  */
@@ -15,6 +17,20 @@ class UserController {
     return res.json(success("Users fetched succesfully", users));
   }
 
+  async show(req, res) {
+    try {
+      const user = await User.query().findById(parseInt(req.params.id));
+      if (!user) {
+        return res.json(error(400, "User not found"));
+      }
+      return res.json(success("User details fetched successfully.", user));
+    } catch (excepetion) {
+      logger.error(excepetion);
+
+      return res.json(error(500));
+    }
+  }
+
   /**
    * Create new user.
    */
@@ -24,7 +40,7 @@ class UserController {
 
       return res.json(success("Successfully added new user.", user));
     } catch (excepetion) {
-      return res.json(error(500, excepetion.detail));
+      return res.json(error(500));
     }
   }
 
@@ -53,7 +69,7 @@ class UserController {
       }
       return res.json(error(401, "Invalid credentials."));
     } catch (excepetion) {
-      return res.json(error(500, excepetion.detail));
+      return res.json(error(500));
     }
   }
 }

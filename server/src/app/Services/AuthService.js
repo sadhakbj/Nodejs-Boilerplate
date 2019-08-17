@@ -1,15 +1,15 @@
 const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../../config/app");
 class AuthService {
-  authenticate() {}
-
   generateToken(user) {
+    console.log(jwt_secret);
     const { id, email } = user;
     const token = jwt.sign(
       {
         id,
         email
       },
-      "secret",
+      jwt_secret,
       {
         expiresIn: "1h"
       }
