@@ -5,8 +5,12 @@ const dotEnv = require("dotenv");
 const Knex = require("knex");
 const { Model } = require("objection");
 var morgan = require("morgan");
+const cors = require("cors");
 dotEnv.config();
 const app = express();
+
+app.use(cors());
+app.options("*", cors());
 
 /**
  * Set up objection.

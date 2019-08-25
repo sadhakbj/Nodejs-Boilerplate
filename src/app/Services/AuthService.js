@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../../config/app");
+const User = require("../models/User");
 
 class AuthService {
   generateToken(user) {
@@ -16,6 +17,15 @@ class AuthService {
     );
 
     return token;
+  }
+
+  async findUserByEmail(email) {
+    const user = await User.query()
+      .first()
+      .where({ email });
+
+
+    return user;
   }
 }
 

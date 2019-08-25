@@ -11,7 +11,6 @@ exports.error = (code, msg) => {
   let message = code === 500 ? "Whoops, Something went wrong." : msg;
   return {
     success: false,
-    code: code,
     message
   };
 };

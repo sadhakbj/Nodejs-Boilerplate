@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
   let validation = new Validator(data, rules);
 
   if (validation.fails()) {
-    return res.send(validation.errors);
+    return res.status(422).send(validation.errors);
   }
 
   next();
