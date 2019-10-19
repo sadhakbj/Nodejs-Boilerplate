@@ -1,17 +1,19 @@
-const Validator = require("validatorjs");
+const Validator = require("validatorjs")
+const {HTTP_UNPROCESSABLE_ENTITY} = require('../../../constants/response')
+
 
 module.exports = (req, res, next) => {
-  const data = req.body;
-  const rules = {
-    email: "required|email",
-    password: "required"
-  };
+    const data = req.body
+    const rules = {
+        email: "required|email",
+        password: "required",
+    }
 
-  let validation = new Validator(data, rules);
+    let validation = new Validator(data, rules)
 
-  if (validation.fails()) {
-    return res.status(422).send(validation.errors);
-  }
+    if (validation.fails()) {
+        return res.status(HTTP_UNPROCESSABLE_ENTITY).send(validation.errors)
+    }
 
-  next();
-};
+    next()
+}

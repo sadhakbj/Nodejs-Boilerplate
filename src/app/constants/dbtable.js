@@ -2,7 +2,7 @@
  * Specity all the tables' name over here.
  */
 const tables = {
-  users: "tbl_users"
+  users: "auth_users"
 };
 
 module.exports = tables;
