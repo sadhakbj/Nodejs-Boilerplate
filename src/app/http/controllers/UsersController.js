@@ -40,6 +40,7 @@ class UserController {
 
       return res.json(success("Successfully added new user.", user));
     } catch (excepetion) {
+       console.log(excepetion)
       return res.json(error(500));
     }
   }
