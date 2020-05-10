@@ -1,10 +1,9 @@
-const express = require("express")
+import express from 'express'
+import AuthController from '../app/http/controllers/AuthController'
+import validateLogin from '../app/http/middlewares/validations/loginvalidator'
 let router = express.Router()
-const authenticate = require("../app/http/middlewares/authenticate")
-const AuthController = require("../app/http/controllers/AuthController")
-const validateLogin = require("../app/http/middlewares/validations/loginvalidator")
 
-router.post("/login", validateLogin, AuthController.login)
-router.post("/forgot-password", AuthController.requestPasswordReset)
+router.post('/login', validateLogin, AuthController.login)
+router.post('/forgot-password', AuthController.requestPasswordReset)
 
-module.exports = router
+export default router

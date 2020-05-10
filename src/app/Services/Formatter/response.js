@@ -1,6 +1,6 @@
-const { HTTP_INTERNAL_SERVER_ERROR } = require("../../constants/response")
+const { HTTP_INTERNAL_SERVER_ERROR } = require('../../constants/response')
 
-exports.success = (message, data) => {
+export const success = (message, data) => {
     return {
         success: true,
         message,
@@ -8,8 +8,11 @@ exports.success = (message, data) => {
     }
 }
 
-exports.error = (code, msg) => {
-    let message = code === HTTP_INTERNAL_SERVER_ERROR ? "Whoops, Something went wrong." : msg
+export const error = (code, msg) => {
+    let message =
+        code === HTTP_INTERNAL_SERVER_ERROR
+            ? 'Whoops, Something went wrong.'
+            : msg
     return {
         success: false,
         message,

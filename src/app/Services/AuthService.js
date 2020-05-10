@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken")
-const { jwt_secret } = require("../../config/app")
-const User = require("../models/User")
+import jwt from 'jsonwebtoken'
+import appConfig from '../../config/app'
+import User from '../models/User'
 
 class AuthService {
     generateToken(user) {
@@ -10,17 +10,16 @@ class AuthService {
                 id,
                 email,
             },
-            jwt_secret,
+            appConfig.jwt_secret,
             {
-                expiresIn: "4h",
-            },
+                expiresIn: '4h',
+            }
         )
     }
 
     async findUserByEmail(email) {
-        console.log(User)
         return await User.query().first().where({ email })
     }
 }
 
-module.exports = new AuthService()
+export default new AuthService()

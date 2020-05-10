@@ -1,6 +1,6 @@
-const AuthService = require("../../Services/AuthService")
-const { success, error } = require("../../Services/Formatter/response")
-const { HTTP_UNAUTHORIZED, HTTP_NOT_FOUND } = require("../../constants/response")
+import { HTTP_NOT_FOUND, HTTP_UNAUTHORIZED } from '../../constants/response'
+import AuthService from '../../Services/AuthService'
+import { error, success } from '../../Services/Formatter/response'
 
 class AuthController {
     /**
@@ -15,12 +15,16 @@ class AuthController {
         const user = await AuthService.findUserByEmail(email)
 
         if (!user || !(await user.verifyPassword(password))) {
-            return res.status(HTTP_UNAUTHORIZED).json(error(HTTP_UNAUTHORIZED, "Invalid credentials."))
+            return res
+                .status(HTTP_UNAUTHORIZED)
+                .json(error(HTTP_UNAUTHORIZED, 'Invalid credentials.'))
         }
 
         const token = AuthService.generateToken(user)
 
-        return res.json(success("User logged in successfully.", { user, token }))
+        return res.json(
+            success('User logged in successfully.', { user, token })
+        )
     }
 
     /**
@@ -35,9 +39,11 @@ class AuthController {
         const user = AuthService.findUserByEmail(email)
 
         if (!user) {
-            return res.status(HTTP_NOT_FOUND).json(error(HTTP_NOT_FOUND, "User not found"))
+            return res
+                .status(HTTP_NOT_FOUND)
+                .json(error(HTTP_NOT_FOUND, 'User not found'))
         }
     }
 }
 
-module.exports = new AuthController()
+export default new AuthController()
