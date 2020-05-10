@@ -1,32 +1,32 @@
-const express = require("express")
-const bodyParser = require("body-parser")
-const path = require("path")
-const dotEnv = require("dotenv")
-const Knex = require("knex")
-const { Model } = require("objection")
-let morgan = require("morgan")
-const cors = require("cors")
-dotEnv.config()
-const app = express()
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import 'dotenv/config'
+import express from 'express'
+import Knex from 'knex'
+import morgan from 'morgan'
+import { Model } from 'objection'
+import knexFile from './knexfile'
+import authRoutes from './routes/auth'
+import userRoutes from './routes/users'
 
+const app = express()
 app.use(cors())
-app.options("*", cors())
+app.options('*', cors())
 
 /**
  * Set up objection.
  */
-const knexFile = require("./knexfile")
-const knex = Knex(knexFile[process.env.NODE_ENV])
+const knex = Knex(knexFile['development'])
 Model.knex(knex)
 
 app.use(bodyParser.json())
-app.use(morgan("combined"))
+app.use(morgan('combined'))
 
-app.get("/", (req, res) => {
-    res.send("Welcome to my new application")
+app.get('/', (req, res) => {
+    res.send('Welcome to my new application')
 })
 
-app.use("/api/auth", require("./routes/auth"))
-app.use("/api/users", require("./routes/users"))
+app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
 
-module.exports = app
+export default app

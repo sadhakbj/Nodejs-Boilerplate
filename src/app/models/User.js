@@ -1,24 +1,21 @@
-const BaseModel = require("./BaseModel")
-const { users } = require("../../app/constants/dbtable")
-const Password = require("objection-password")()
-
+import Password from 'objection-password'
+import { TBL_USERS } from '../../app/constants/dbtable'
+import BaseModel from './BaseModel'
 /**
  *  Class User Model.
  * @extends BaseModel
  */
-class User extends Password(BaseModel) {
+export default class User extends Password()(BaseModel) {
     /**
      * Specify the table name.
      *
      * @return string
      */
     static get tableName() {
-        return users
+        return TBL_USERS
     }
 
     static get hiddenFields() {
-        return ["password"]
+        return ['password']
     }
 }
-
-module.exports = User

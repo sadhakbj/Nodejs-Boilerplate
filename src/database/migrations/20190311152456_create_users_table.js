@@ -1,14 +1,14 @@
-const { users } = require("../../app/constants/dbtable")
+import { TBL_USERS } from '../../app/constants/dbtable'
 /**
  * Run the migrations.
  */
-exports.up = knex => {
-    return knex.schema.createTable(users, table => {
+export const up = (knex) => {
+    return knex.schema.createTable(TBL_USERS, (table) => {
         table.increments()
-        table.string("name").notNullable()
-        table.string("username").unique().notNullable()
-        table.string("email").notNullable()
-        table.string("password").notNullable()
+        table.string('name').notNullable()
+        table.string('username').unique().notNullable()
+        table.string('email').notNullable()
+        table.string('password').notNullable()
 
         table.timestamps(true, true)
     })
@@ -17,4 +17,4 @@ exports.up = knex => {
 /**
  * Reverse the migrations.
  */
-exports.down = knex => knex.schema.dropTable(users)
+export const down = (knex) => knex.schema.dropTable(TBL_USERS)

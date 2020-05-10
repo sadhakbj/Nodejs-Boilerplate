@@ -1,13 +1,13 @@
-const Validator = require("validatorjs")
-const { HTTP_UNPROCESSABLE_ENTITY } = require("../../../constants/response")
+import Validator from 'validatorjs'
+import { HTTP_UNPROCESSABLE_ENTITY } from '../../../constants/response'
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
     const data = req.body
     const rules = {
-        email: "required|email",
-        name: "required",
-        username: "required",
-        password: "required",
+        email: 'required|email',
+        name: 'required',
+        username: 'required',
+        password: 'required',
     }
 
     let validation = new Validator(data, rules)

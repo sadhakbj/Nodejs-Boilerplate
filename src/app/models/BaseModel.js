@@ -1,20 +1,18 @@
-const { Model } = require("objection");
-const visibility = require("objection-visibility").default;
+import { Model } from 'objection'
+import visibility from 'objection-visibility'
 
 /**
  * Class BaseModel.
  * @extends Model
  */
-class BaseModel extends visibility(Model) {
-  static get hidden() {
-    let hidden = ["created_at", "updated_at"];
+export default class BaseModel extends visibility(Model) {
+    static get hidden() {
+        let hidden = ['created_at', 'updated_at']
 
-    return hidden.concat(this.hiddenFields);
-  }
+        return hidden.concat(this.hiddenFields)
+    }
 
-  static get hiddenFields() {
-    return [];
-  }
+    static get hiddenFields() {
+        return []
+    }
 }
-
-module.exports = BaseModel;
