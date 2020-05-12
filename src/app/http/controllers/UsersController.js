@@ -1,3 +1,4 @@
+import { HTTP_INTERNAL_SERVER_ERROR } from '../../constants/response'
 import User from '../../models/User'
 import { error, success } from '../../Services/Formatter/response'
 import logger from '../../Services/logger'
@@ -15,7 +16,7 @@ class UserController {
             const users = await User.query()
             return res.json(success('Users fetched succesfully', users))
         } catch (e) {
-            return res.json(error(400, e.message))
+            return res.json(error(HTTP_INTERNAL_SERVER_ERROR, e.message))
         }
     }
 
@@ -53,5 +54,4 @@ class UserController {
         return res.json(success('User fetched succesfully', user))
     }
 }
-
 export default new UserController()

@@ -6,27 +6,38 @@ import Knex from 'knex'
 import morgan from 'morgan'
 import { Model } from 'objection'
 import knexFile from './knexfile'
-import authRoutes from './routes/auth'
-import userRoutes from './routes/users'
+import routes from './routes'
 
-const app = express()
-app.use(cors())
-app.options('*', cors())
+class Application {
+    app
+    constructor() {
+        this.app = express()
+        this.installRoutes()
+        this.installServies()
+        this.installDatabase()
+    }
 
-/**
- * Set up objection.
- */
-const knex = Knex(knexFile['development'])
-Model.knex(knex)
+    installServies() {
+        this.app.use(cors())
+        this.app.options('*', cors())
+        this.app.use(bodyParser.json())
+        this.app.use(morgan('combined'))
+    }
 
-app.use(bodyParser.json())
-app.use(morgan('combined'))
+    installDatabase() {
+        const knex = Knex(knexFile['development'])
+        Model.knex(knex)
+    }
 
-app.get('/', (req, res) => {
-    res.send('Welcome to my new application')
-})
+    installRoutes() {
+        this.app.use('/api', routes)
 
-app.use('/api/auth', authRoutes)
-app.use('/api/users', userRoutes)
-
-export default app
+        this.app.use('*', (req, res, next) => {
+            res.status(404).json({
+                success: false,
+                message: 'Item / page you are looking could not be found.',
+            })
+        })
+    }
+}
+export default new Application()
