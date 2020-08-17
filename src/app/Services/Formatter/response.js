@@ -9,10 +9,7 @@ export const success = (message, data) => {
 }
 
 export const error = (code, msg) => {
-    let message =
-        code === HTTP_INTERNAL_SERVER_ERROR
-            ? 'Whoops, Something went wrong.'
-            : msg
+    let message = code === HTTP_INTERNAL_SERVER_ERROR ? 'Whoops, Something went wrong.' : msg
     return {
         success: false,
         message,
