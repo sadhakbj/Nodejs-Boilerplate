@@ -1,4 +1,4 @@
-const { HTTP_INTERNAL_SERVER_ERROR } = require('../../constants/response')
+import { HTTP_INTERNAL_SERVER_ERROR } from '../../constants/response'
 
 export const success = (message, data) => {
     return {

@@ -4,3 +4,4 @@ src/logs/*
 .idea/
 .DS_STORE
 build/
+pgdata/
